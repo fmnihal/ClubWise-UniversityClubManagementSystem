@@ -1,0 +1,155 @@
+8 Tables so far:
+admin_panel
+clubs
+event_participation
+event_proposals
+events
+magazine_contents
+memberships
+users
+
+
+
+Users:
+
+user_id (Primary Key)
+username
+email
+password
+role (visitor, club member, admin)
+is_verified
+verification_code
+profile_picture
+
+Clubs:
+
+club_id (Primary Key)
+club_name
+description
+logo
+
+Events:
+
+event_id (Primary Key)
+event_name
+club_id (Foreign Key referencing Clubs)
+date
+time
+location
+description
+
+Event_Participation:
+
+participation_id (Primary Key)
+event_id (Foreign Key referencing Events)
+user_id (Foreign Key referencing Users)
+participation_status (enrolled, attended)
+feedback
+star_rating
+
+Memberships:
+
+membership_id (Primary Key)
+club_id (Foreign Key referencing Clubs)
+user_id (Foreign Key referencing Users)
+membership_status (pending, approved, rejected)
+
+Event_Proposals:
+
+proposal_id (Primary Key)
+club_id (Foreign Key referencing Clubs)
+event_name
+proposal_status (submitted, approved, rejected)
+
+Magazine_Contents:
+
+content_id (Primary Key)
+club_id (Foreign Key referencing Clubs)
+user_id (Foreign Key referencing Users)
+content_title
+content_body
+submission_date
+approval_status (pending, approved, rejected)
+
+Admin_Panel:
+
+admin_id (Primary Key)
+user_id (Foreign Key referencing Users)
+permissions (manage_membership, manage_events, manage_content, etc.)
+
+
+
+-- Users table
+CREATE TABLE Users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    role VARCHAR(20) NOT NULL,
+    is_verified BOOLEAN DEFAULT FALSE,
+    verification_code VARCHAR(20),
+    profile_picture VARCHAR(100)
+);
+
+-- Clubs table
+CREATE TABLE Clubs (
+    club_id SERIAL PRIMARY KEY,
+    club_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    logo VARCHAR(100)
+);
+
+-- Events table
+CREATE TABLE Events (
+    event_id SERIAL PRIMARY KEY,
+    event_name VARCHAR(100) NOT NULL,
+    club_id INT REFERENCES Clubs(club_id) ON DELETE CASCADE,
+    date DATE,
+    time TIME,
+    location VARCHAR(100),
+    description TEXT
+);
+
+-- Event_Participation table
+CREATE TABLE Event_Participation (
+    participation_id SERIAL PRIMARY KEY,
+    event_id INT REFERENCES Events(event_id) ON DELETE CASCADE,
+    user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
+    participation_status VARCHAR(20),
+    feedback TEXT,
+    star_rating INT
+);
+
+-- Memberships table
+CREATE TABLE Memberships (
+    membership_id SERIAL PRIMARY KEY,
+    club_id INT REFERENCES Clubs(club_id) ON DELETE CASCADE,
+    user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
+    membership_status VARCHAR(20)
+);
+
+-- Event_Proposals table
+CREATE TABLE Event_Proposals (
+    proposal_id SERIAL PRIMARY KEY,
+    club_id INT REFERENCES Clubs(club_id) ON DELETE CASCADE,
+    event_name VARCHAR(100),
+    proposal_status VARCHAR(20)
+);
+
+-- Magazine_Contents table
+CREATE TABLE Magazine_Contents (
+    content_id SERIAL PRIMARY KEY,
+    club_id INT REFERENCES Clubs(club_id) ON DELETE CASCADE,
+    user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
+    content_title VARCHAR(200),
+    content_body TEXT,
+    submission_date DATE,
+    approval_status VARCHAR(20)
+);
+
+-- Admin_Panel table
+CREATE TABLE Admin_Panel (
+    admin_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id) ON DELETE CASCADE,
+    permissions VARCHAR(100)
+);

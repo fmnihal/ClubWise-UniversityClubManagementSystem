@@ -1,0 +1,30 @@
+project/
+├── app.js
+├── routes/
+│   ├── index.js
+│   ├── authRoutes.js
+│   ├── clubRoutes.js
+│   ├── membershipRoutes.js
+│   └── eventRoutes.js
+├── controllers/
+│   ├── authController.js
+│   ├── clubController.js
+│   ├── membershipController.js
+│   └── eventController.js
+├── models/
+│   ├── user.js
+│   ├── club.js
+│   ├── event.js
+│   └── membership.js
+└── views/
+    ├── index.ejs
+    ├── login.ejs
+    ├── signup.ejs
+    ├── club.ejs
+    ├── event.ejs
+    └── ...
+
+
+In each file, you'll define specific functionalities related to its purpose. For example, authRoutes.js will contain routes for authentication, clubController.js will contain controller functions for club-related operations, and user.js will define the User model for interacting with the database.
+
+By organizing your code this way, your application becomes more maintainable, scalable, and easier to understand. Each file or directory has a specific responsibility, making it easier to locate and modify code as your project grows.
