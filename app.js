@@ -32,7 +32,54 @@ app.listen(PORT, () => {
 
 // By following these steps, you'll have initialized an Express app, added necessary middleware for request and response parsing, defined routes to handle various functionalities, and started the server to listen for incoming requests. You can now build upon this foundation by implementing the desired functionalities in your application.
 
+// // Define route for exploring clubs
+// app.get('/explore-clubs', (req, res) => {
+//   res.send('Explore Clubs page');
+// });
+// // Define route for about us
+// app.get('/about-us', (req, res) => {
+//   res.send('About Us Page');
+// });
+// // Define route for reach us
+// app.get('/reach-us', (req, res) => {
+//   res.send('Reach Us Page');
+// });
 
+// Define route for exploring clubs
+app.get('/explore-clubs', (req, res) => {
+  res.render('exploreClubs');
+});
+// Define route for about us
+app.get('/about-us', (req, res) => {
+  res.render('aboutUs');
+});
+// Define route for reach us
+app.get('/reach-us', (req, res) => {
+  res.render('reachUs');
+});
+
+
+// Define route for IUTCS club
+app.get('/clubs/iutcs', (req, res) => {
+  res.render('iutcs'); // Render the specific club's webpage (iutcs.ejs)
+});
+// Define route for IUTDS club
+app.get('/clubs/iutds', (req, res) => {
+  res.render('iutds'); // Render the specific club's webpage (iutds.ejs)
+});
+// Define routes for other clubs similarly...
+// Define route for IUTPS club
+app.get('/clubs/iutps', (req, res) => {
+  res.render('iutps'); // Render the specific club's webpage (iutps.ejs)
+});
+// Define route for IUTCBS club
+app.get('/clubs/iutcbs', (req, res) => {
+  res.render('iutcbs'); // Render the specific club's webpage (iutcbs.ejs)
+});
+// Define route for IUTSIKS club
+app.get('/clubs/iutsiks', (req, res) => {
+  res.render('iutsiks'); // Render the specific club's webpage (iutsiks.ejs)
+});
 
 
 
