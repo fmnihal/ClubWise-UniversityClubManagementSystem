@@ -45,6 +45,11 @@ app.listen(PORT, () => {
 //   res.send('Reach Us Page');
 // });
 
+// Define route for sign-up page
+app.get('/create-account', (req, res) => {
+  res.render('createAccount'); // Render the sign-up page
+});
+
 // Define route for exploring clubs
 app.get('/explore-clubs', (req, res) => {
   res.render('exploreClubs');
@@ -82,7 +87,18 @@ app.get('/clubs/iutsiks', (req, res) => {
 });
 
 
-
+// Import adminController
+const adminController = require('./controllers/adminController');
+// Define route for approving membership requests
+app.post('/admin/approve-membership', adminController.approveMembership);
+// Import membershipController
+const membershipController = require('./controllers/membershipController');
+// Define route for applying for membership
+app.post('/apply-for-membership', membershipController.applyForMembership);
+// Define route for membership process (e.g., apply for membership, approval/rejection by admin)
+app.post('/apply-for-membership', membershipController.applyForMembership);
+app.post('/admin/approve-membership', adminController.approveMembership);
+app.post('/admin/reject-membership', adminController.rejectMembership);
 
 
 
